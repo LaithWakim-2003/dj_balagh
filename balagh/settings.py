@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'authenticate',
     'locations',
-    'reports'
+    'reports',
+    'faker'
 ]
 
 MIDDLEWARE = [
