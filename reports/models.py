@@ -18,4 +18,5 @@ class Report(models.Model):
     report_type = models.CharField(max_length=50, choices=REPORT_TYPE_CHOICES)
     title = models.CharField(max_length=255)
     description = models.TextField()
+    image = models.ImageField(upload_to='reports/',blank=True,null=True)
     created_at = models.DateTimeField(auto_now_add=True)

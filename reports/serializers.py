@@ -19,7 +19,8 @@ class ReportSerializer(serializers.ModelSerializer):
     title = serializers.CharField(required = True)
     description = serializers.CharField(required = True)
     report_type = serializers.ChoiceField(required = True,choices=REPORT_TYPE_CHOICES)
+    image = serializers.ImageField(required=False, allow_null=True)
     class Meta:
         model = Report
-        fields = ['id', 'user', 'title', 'description', 'report_type', 'created_at']
+        fields = ['id', 'user', 'title', 'description', 'report_type', 'created_at','image']
         read_only_fields = ['user', 'created_at']
