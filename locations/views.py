@@ -21,7 +21,7 @@ def get_governorates(request):
 @authentication_classes([TokenAuthentication])
 @permission_classes([IsAuthenticated])
 def create_governorate(request):
-    if request.user.user_type not in ['Admin']:
+    if request.user.user_type not in ['admin']:
         return Response({"message":"Not Authorized"},status=status.HTTP_401_UNAUTHORIZED)
     serializer = GovernorateSerializer(data = request.data)
     if serializer.is_valid():
@@ -34,7 +34,7 @@ def create_governorate(request):
 @authentication_classes([TokenAuthentication])
 @permission_classes([IsAuthenticated])
 def update_governorate(request, governorate_id):
-    if request.user.user_type not in ['Admin']:
+    if request.user.user_type not in ['admin']:
         return Response({"message": "Not Authorized"}, status=status.HTTP_401_UNAUTHORIZED)
     try:
         governorate = Governorate.objects.get(pk=governorate_id)
@@ -52,7 +52,7 @@ def update_governorate(request, governorate_id):
 @authentication_classes([TokenAuthentication])
 @permission_classes([IsAuthenticated])
 def delete_governorate(request, governorate_id):
-    if request.user.user_type not in ['Admin']:
+    if request.user.user_type not in ['admin']:
         return Response({"message": "Not Authorized"}, status=status.HTTP_401_UNAUTHORIZED)
     try:
         governorate = Governorate.objects.get(pk=governorate_id)
@@ -77,7 +77,7 @@ def get_cities(request,governorate_id):
 @authentication_classes([TokenAuthentication])
 @permission_classes([IsAuthenticated])
 def create_city(request):
-    if request.user.user_type not in ['Admin']:
+    if request.user.user_type not in ['admin']:
         return Response({"message":"Not Authorized"},status=status.HTTP_401_UNAUTHORIZED)
     serializer = CitySerializer(data = request.data)
     if serializer.is_valid():
@@ -90,7 +90,7 @@ def create_city(request):
 @authentication_classes([TokenAuthentication])
 @permission_classes([IsAuthenticated])
 def update_city(request, city_id):
-    if request.user.user_type not in ['Admin']:
+    if request.user.user_type not in ['admin']:
         return Response({"message": "Not Authorized"}, status=status.HTTP_401_UNAUTHORIZED)
     try:
         city = City.objects.get(pk=city_id)
@@ -111,7 +111,7 @@ def update_city(request, city_id):
 @authentication_classes([TokenAuthentication])
 @permission_classes([IsAuthenticated])
 def delete_city(request, city_id):
-    if request.user.user_type not in ['Admin']:
+    if request.user.user_type not in ['admin']:
         return Response({"message": "Not Authorized"}, status=status.HTTP_401_UNAUTHORIZED)
     try:
         city = City.objects.get(pk=city_id)

@@ -10,7 +10,7 @@ from django.shortcuts import get_object_or_404
 
 @api_view(['POST'])
 def register(request):
-    if request.data['user_type'] not in ['Manager','User']:
+    if request.data['user_type'] not in ['manager','user']:
         return Response({"message":"invalid user type"},status=status.HTTP_400_BAD_REQUEST)
     serializer = UserSerializer(data = request.data)
     if serializer.is_valid():
@@ -31,8 +31,8 @@ def login(request):
         user = get_object_or_404(User,phone_number = request.data['phone_number'])
         if not user.check_password(request.data['password']):
             return Response({"message":"Invalid phone number or password"},status=status.HTTP_400_BAD_REQUEST)
-        # if user.is_active == False:
-        #     return Response({"message":"User is not activated"},status=status.HTTP_400_BAD_REQUEST)
+        if user.is_active == False:
+            return Response({"message":"User is not activated"},status=status.HTTP_400_BAD_REQUEST)
         token,created = Token.objects.get_or_create(user = user)
         user_serializer = UserSerializer(instance = user)
         return Response({"message":"User logged-in successfully",'token':token.key,'user':user_serializer.data},status=status.HTTP_200_OK)
